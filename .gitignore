@@ -25,6 +25,9 @@ venv/
 # sqlite
 *.db
 
+# submissions
+software-house-website-v2/backend/submissions/
+
 # misc
 .DS_Store
 *.pem
