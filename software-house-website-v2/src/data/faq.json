@@ -1,0 +1,32 @@
+[
+  {
+    "id": "faq-1",
+    "question": "What is your typical project engagement model?",
+    "answer": "We offer flexible engagement models including fixed-price projects, dedicated teams, and time-and-materials. We'll recommend the best approach based on your project scope, timeline, and requirements. Most clients start with a discovery phase to define scope and objectives."
+  },
+  {
+    "id": "faq-2",
+    "question": "How long does a typical project take?",
+    "answer": "Timelines vary by project complexity. A standard web application typically takes 8-16 weeks from discovery to launch. AI/ML projects range from 4-week proof-of-concepts to multi-month production systems. Cloud migrations depend on workload volume and complexity. We provide a detailed timeline during the planning phase."
+  },
+  {
+    "id": "faq-3",
+    "question": "What technologies do you specialize in?",
+    "answer": "Our core expertise spans React, Node.js, Python, TypeScript for web development; TensorFlow, PyTorch, LangChain for AI/ML; and AWS, Azure, GCP, Kubernetes, and Terraform for cloud. We stay current with emerging technologies and select the best tools for each project's specific needs."
+  },
+  {
+    "id": "faq-4",
+    "question": "Do you offer post-launch support and maintenance?",
+    "answer": "Yes, we provide comprehensive post-launch support including bug fixes, performance monitoring, feature enhancements, and infrastructure management. We offer flexible SLA-based support packages tailored to your needs."
+  },
+  {
+    "id": "faq-5",
+    "question": "How do you ensure project quality and security?",
+    "answer": "Quality is embedded in our process: automated testing, code reviews, continuous integration, and staging environments. For security, we follow OWASP guidelines, implement SAST/DAST scanning, conduct penetration testing, and ensure GDPR/SOC 2/HIPAA compliance as required."
+  },
+  {
+    "id": "faq-6",
+    "question": "Can you work with our existing team?",
+    "answer": "Absolutely. We frequently collaborate with in-house teams through staff augmentation, co-development, or consulting arrangements. We integrate with your existing workflows, tools, and communication channels to ensure seamless collaboration."
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "t-1",
+    "quote": "iotaDev transformed our outdated platform into a modern, scalable solution. Their team's technical expertise and project management were exceptional. We saw a 35% revenue increase within three months of launch.",
+    "clientName": "Jennifer Walsh",
+    "company": "RetailCorp",
+    "role": "VP of Technology",
+    "logo": ""
+  },
+  {
+    "id": "t-2",
+    "quote": "The AI document processing system iotaDev built for us has been a game-changer. What used to take our legal team weeks now happens in hours. Their understanding of both ML and practical business needs is remarkable.",
+    "clientName": "David Kim",
+    "company": "LegalTech Solutions",
+    "role": "CEO",
+    "logo": ""
+  },
+  {
+    "id": "t-3",
+    "quote": "Working with iotaDev on our cloud migration was seamless. They handled the complexity of moving 200+ workloads across multiple clouds while maintaining full compliance. Infrastructure costs dropped 40%.",
+    "clientName": "Michael Torres",
+    "company": "FinServe Group",
+    "role": "Director of Engineering",
+    "logo": ""
+  }
+]

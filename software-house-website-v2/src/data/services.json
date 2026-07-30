@@ -1,0 +1,245 @@
+[
+  {
+    "id": "ai-ml",
+    "title": "AI & Machine Learning",
+    "tagline": "Intelligent solutions that transform your data into advantage",
+    "description": "Leverage the power of artificial intelligence and machine learning to automate processes, gain insights, and create intelligent products. Our team specializes in NLP, computer vision, predictive analytics, and LLM integration.",
+    "icon": "brain",
+    "technologies": ["Python", "TensorFlow", "PyTorch", "LangChain", "OpenAI", "Hugging Face"],
+    "features": [
+      "Custom ML model development",
+      "LLM integration & fine-tuning",
+      "Natural language processing",
+      "Computer vision solutions",
+      "Predictive analytics systems"
+    ],
+    "subServices": [
+      {
+        "id": "agent-workflow",
+        "title": "Agent Workflow",
+        "tagline": "Orchestrated multi-agent pipelines for complex task automation",
+        "description": "We design and deploy intelligent agent workflows that coordinate multiple AI agents to execute complex, multi-step business processes. From data collection and analysis to decision-making and execution, our agent workflows operate autonomously with human-in-the-loop oversight.",
+        "icon": "workflow",
+        "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=400&fit=crop",
+        "keyPoints": [
+          "Multi-agent orchestration with dynamic task routing and dependency management",
+          "Human-in-the-loop approval gates for critical decision points",
+          "Observability dashboard with real-time agent trace logs and performance metrics",
+          "Pluggable tool ecosystem — integrate APIs, databases, and external services seamlessly",
+          "Self-healing workflows with automatic retry, fallback, and escalation policies"
+        ],
+        "technologies": ["LangChain", "LangGraph", "Python", "OpenAI", "Redis", "Docker"]
+      },
+      {
+        "id": "agentic-system",
+        "title": "Agentic System",
+        "tagline": "Autonomous AI systems that perceive, reason, and act",
+        "description": "We build agentic AI systems that operate autonomously within your domain — perceiving environment changes, reasoning about optimal actions, and executing tasks without constant human intervention. Goal-oriented, self-correcting, and continuously learning.",
+        "icon": "agent",
+        "image": "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=600&h=400&fit=crop",
+        "keyPoints": [
+          "Goal-oriented task decomposition with recursive sub-goal planning",
+          "Memory-augmented agents with long-term and episodic recall",
+          "Closed-loop feedback systems with reinforcement learning from outcomes",
+          "Safety-constrained action spaces with guardrails and boundary enforcement",
+          "Continuous model fine-tuning based on real-world performance data"
+        ],
+        "technologies": ["Python", "CrewAI", "AutoGen", "Weaviate", "LangChain", "OpenAI"]
+      },
+      {
+        "id": "fde",
+        "title": "Forward Deployed Engineer (FDE)",
+        "tagline": "Embedded AI engineering on-site to ship production-ready solutions",
+        "description": "Our Forward Deployed Engineers embed directly with your team to rapidly architect, build, and deploy AI solutions in your environment. We bridge the gap between cutting-edge AI research and your production systems — delivering working software in weeks, not quarters.",
+        "icon": "deploy",
+        "image": "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=400&fit=crop",
+        "keyPoints": [
+          "Rapid on-site deployment with deep integration into your existing infrastructure",
+          "Custom AI solution design tailored to your proprietary data and domain",
+          "End-to-end ownership from requirements gathering to production monitoring",
+          "Knowledge transfer and team upskilling through paired engineering sessions",
+          "Iterative delivery with two-week sprint cycles and continuous stakeholder demos"
+        ],
+        "technologies": ["Python", "TypeScript", "Docker", "Kubernetes", "Terraform", "AWS"]
+      },
+      {
+        "id": "business-agent",
+        "title": "Specific Business Agent",
+        "tagline": "Purpose-built AI agents trained on your business domain",
+        "description": "We develop specialized AI agents fine-tuned for specific business functions — sales, customer support, compliance, HR, procurement, and more. Each agent is trained on your data, understands your domain language, and integrates with your existing tools and workflows.",
+        "icon": "briefcase",
+        "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
+        "keyPoints": [
+          "Domain-specific RAG pipelines with your proprietary knowledge base",
+          "Fine-tuned LLMs on industry terminology, policies, and historical interactions",
+          "Seamless CRM, ERP, and ticketing system integration via native connectors",
+          "Automated SLA monitoring with escalation triggers and performance dashboards",
+          "Role-based agent personas with tailored communication styles and access controls"
+        ],
+        "technologies": ["LangChain", "OpenAI", "LlamaIndex", "PostgreSQL", "HubSpot", "Python"]
+      },
+      {
+        "id": "ai-integrated",
+        "title": "AI Integrated Systems",
+        "tagline": "End-to-end AI infusion into your existing product ecosystem",
+        "description": "We retrofit your existing software products with AI capabilities — adding intelligence to search, recommendations, document processing, decision support, and more. No rebuild required. We integrate AI as a seamless layer within your current architecture.",
+        "icon": "integrate",
+        "image": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&h=400&fit=crop",
+        "keyPoints": [
+          "Plug-and-play AI middleware layer that sits on top of your existing stack",
+          "Batch and real-time inference pipelines with latency SLA guarantees",
+          "A/B testing framework for measuring AI feature impact on business KPIs",
+          "Gradual rollout with feature flags, canary deployments, and rollback support",
+          "Comprehensive monitoring with drift detection, model decay alerts, and retraining triggers"
+        ],
+        "technologies": ["Python", "FastAPI", "Redis", "Docker", "Kubernetes", "MLflow"]
+      }
+    ]
+  },
+  {
+    "id": "web-dev",
+    "title": "Web Development",
+    "tagline": "Full-stack web applications built for scale",
+    "description": "We build modern, performant web applications using cutting-edge technologies. From responsive frontends with React and Next.js to robust backends with Node.js, Python, and Go, our team delivers end-to-end solutions that drive business growth.",
+    "icon": "code",
+    "technologies": ["React", "Next.js", "Node.js", "Python", "TypeScript", "PostgreSQL", "AWS"],
+    "features": [
+      "Custom web application development",
+      "RESTful & GraphQL API design",
+      "Cloud-native architecture",
+      "Performance optimization",
+      "CI/CD pipeline setup"
+    ],
+    "subServices": [
+      {
+        "id": "custom-web-app",
+        "title": "Custom Web Application",
+        "tagline": "Tailored solutions engineered for your exact business needs",
+        "description": "We design and build bespoke web applications from the ground up, tailored to your unique workflows, business logic, and growth goals. No templates, no compromises — just purpose-built software that gives you a competitive edge.",
+        "icon": "build",
+        "image": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop",
+        "keyPoints": [
+          "End-to-end custom development from concept to deployment",
+          "Scalable microservices architecture that grows with your user base",
+          "Seamless third-party integrations with your existing toolchain",
+          "Agile delivery with iterative releases and continuous feedback",
+          "Enterprise-grade security with SSO, RBAC, and data encryption"
+        ],
+        "technologies": ["React", "Node.js", "PostgreSQL", "Docker", "AWS", "TypeScript"]
+      },
+      {
+        "id": "ecommerce",
+        "title": "E-Commerce Web",
+        "tagline": "High-converting online stores engineered for revenue growth",
+        "description": "We build feature-rich e-commerce platforms that drive sales and delight customers. From product discovery to checkout, every interaction is optimized for conversion, speed, and mobile-first shopping experiences.",
+        "icon": "cart",
+        "image": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=400&fit=crop",
+        "keyPoints": [
+          "Smart product search with faceted filtering and AI recommendations",
+          "One-click checkout with 20+ payment gateway integrations",
+          "Real-time inventory management across multi-warehouse operations",
+          "Subscription & recurring billing engine with automated invoicing",
+          "Mobile-first PWA with 60+ Lighthouse score for performance"
+        ],
+        "technologies": ["Next.js", "Stripe", "Shopify", "Algolia", "Redis", "Vercel"]
+      },
+      {
+        "id": "saas-web",
+        "title": "SaaS Web",
+        "tagline": "Multi-tenant platforms built for rapid subscription growth",
+        "description": "We architect and build SaaS platforms that scale from your first 10 users to your first million. Multi-tenant isolation, usage-based billing, and self-service onboarding are built in from day one.",
+        "icon": "saas",
+        "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop",
+        "keyPoints": [
+          "Multi-tenant architecture with strict data isolation per tenant",
+          "Usage-based & tiered subscription management with proration",
+          "Self-service onboarding with Stripe Connect and SSO",
+          "Real-time analytics dashboard with custom reporting engine",
+          "API-first design with versioned REST & GraphQL endpoints"
+        ],
+        "technologies": ["Next.js", "Python", "PostgreSQL", "Stripe", "Redis", "DigitalOcean"]
+      },
+      {
+        "id": "dashboard",
+        "title": "Dashboard Web Application",
+        "tagline": "Data-rich command centers that turn raw data into decisions",
+        "description": "We build sophisticated dashboard applications that visualize complex data in real time. Interactive charts, drill-down analytics, and customizable widgets put actionable insights at your team's fingertips.",
+        "icon": "dashboard",
+        "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop",
+        "keyPoints": [
+          "Real-time data streaming with WebSocket and Server-Sent Events",
+          "Interactive D3.js and Chart.js visualizations with drill-down capability",
+          "Role-based access control with per-widget permission granularity",
+          "Custom report builder with export to PDF, CSV, and Excel",
+          "Drag-and-drop widget layout with user-configurable dashboards"
+        ],
+        "technologies": ["React", "D3.js", "WebSocket", "Python", "ClickHouse", "Tailwind"]
+      },
+      {
+        "id": "business-web",
+        "title": "Business Web",
+        "tagline": "Corporate websites that establish authority and generate leads",
+        "description": "We craft high-impact corporate websites that communicate your brand story, showcase your expertise, and convert visitors into qualified leads. Modern design, blazing-fast performance, and SEO-optimized out of the box.",
+        "icon": "globe",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop",
+        "keyPoints": [
+          "Strategic information architecture with data-driven UX design",
+          "Built-in lead capture with CRM integration (HubSpot, Salesforce)",
+          "Headless CMS with structured content for omnichannel delivery",
+          "Enterprise SEO with structured data, sitemaps, and Core Web Vitals",
+          "Global CDN delivery with sub-second load times worldwide"
+        ],
+        "technologies": ["Next.js", "Sanity", "Vercel", "HubSpot", "Tailwind", "TypeScript"]
+      }
+    ]
+  },
+  {
+    "id": "cloud",
+    "title": "Cloud Consulting",
+    "tagline": "Strategic cloud solutions for modern infrastructure",
+    "description": "Navigate the cloud landscape with confidence. We provide end-to-end cloud consulting \u2014 from migration strategy and architecture design to implementation and optimization across AWS, Azure, and GCP.",
+    "icon": "cloud",
+    "technologies": ["AWS", "Azure", "GCP", "Docker", "Kubernetes", "Terraform"],
+    "features": [
+      "Cloud migration strategy",
+      "Infrastructure as Code",
+      "Containerization & orchestration",
+      "Cost optimization",
+      "Security & compliance"
+    ],
+    "subServices": [
+      {
+        "id": "architecture-designer",
+        "title": "Architecture Designer",
+        "tagline": "Scalable, resilient cloud architectures engineered for your workload",
+        "description": "We design cloud-native architectures that balance performance, cost, security, and scalability. From greenfield designs to legacy modernization, our architects deliver battle-tested blueprints following AWS Well-Architected, Azure CAF, and GCP AGF frameworks.",
+        "icon": "architecture",
+        "image": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&h=400&fit=crop",
+        "keyPoints": [
+          "Well-Architected Framework reviews with actionable remediation roadmaps",
+          "Multi-cloud and hybrid architecture designs with unified governance",
+          "Cost modeling and total cost of ownership (TCO) analysis across providers",
+          "Disaster recovery and business continuity architecture with RTO/RPO SLAs",
+          "Security-by-design with zero-trust networking, encryption, and compliance controls"
+        ],
+        "technologies": ["AWS", "Azure", "GCP", "Terraform", "CloudFormation", "Pulumi"]
+      },
+      {
+        "id": "cloud-deployment",
+        "title": "Cloud Deployment",
+        "tagline": "Automated, repeatable deployments from development to production",
+        "description": "We automate your entire cloud deployment pipeline — infrastructure provisioning, application deployment, configuration management, and monitoring. GitOps-driven, fully auditable, and designed for zero-downtime releases across all environments.",
+        "icon": "deploy-cloud",
+        "image": "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=600&h=400&fit=crop",
+        "keyPoints": [
+          "GitOps-driven infrastructure with ArgoCD, Flux, and automated syncing",
+          "Immutable deployments with blue-green, canary, and rolling update strategies",
+          "Infrastructure as Code pipelines with Terraform, Terragrunt, and Crossplane",
+          "Automated secret management with HashiCorp Vault, AWS Secrets Manager, or Azure Key Vault",
+          "Observability stack with Prometheus, Grafana, Datadog, and centralized logging"
+        ],
+        "technologies": ["Docker", "Kubernetes", "Terraform", "ArgoCD", "GitHub Actions", "Datadog"]
+      }
+    ]
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "project-1",
+    "title": "E-Commerce Platform Modernization",
+    "client": "RetailCorp",
+    "summary": "Complete rebuild of a legacy e-commerce platform serving 2M+ monthly users.",
+    "challenge": "The client's monolithic platform was struggling with performance, scaling issues, and long deployment cycles. Frequent outages during peak traffic were costing significant revenue.",
+    "solution": "We architected a microservices-based platform using React, Node.js, and AWS. Implemented event-driven architecture with automated CI/CD pipelines, reducing deployment time from hours to minutes.",
+    "outcome": "99.9% uptime achieved, page load times reduced by 60%, and the platform now handles 5x peak traffic without degradation. Revenue increased 35% due to improved user experience.",
+    "technologies": ["React", "Node.js", "AWS", "Docker", "PostgreSQL"],
+    "image": "",
+    "featured": true
+  },
+  {
+    "id": "project-2",
+    "title": "AI-Powered Document Processing",
+    "client": "LegalTech Solutions",
+    "summary": "Intelligent document analysis system using NLP and computer vision.",
+    "challenge": "Manual document review was taking legal teams hundreds of hours. The client needed an automated solution to extract, classify, and analyze information from thousands of documents daily.",
+    "solution": "Developed a custom ML pipeline combining OCR, NLP transformers, and document classification models. Built a React dashboard for human-in-the-loop validation.",
+    "outcome": "Document processing time reduced by 85%, accuracy reached 97%, and the system processes 10,000+ documents daily with minimal human intervention.",
+    "technologies": ["Python", "TensorFlow", "React", "AWS", "LangChain"],
+    "image": "",
+    "featured": true
+  },
+  {
+    "id": "project-3",
+    "title": "Multi-Cloud Infrastructure Migration",
+    "client": "FinServe Group",
+    "summary": "Strategic migration of 200+ workloads from on-premise to hybrid multi-cloud.",
+    "challenge": "The client operated legacy on-premise infrastructure across 5 data centers, facing high maintenance costs, limited scalability, and compliance challenges.",
+    "solution": "Designed a hybrid multi-cloud strategy spanning AWS and Azure. Implemented Infrastructure as Code with Terraform, containerized applications with Kubernetes, and established comprehensive monitoring and disaster recovery.",
+    "outcome": "Infrastructure costs reduced by 40%, deployment frequency increased 10x, and the environment achieved SOC 2 and HIPAA compliance.",
+    "technologies": ["AWS", "Azure", "Terraform", "Kubernetes", "Docker"],
+    "image": "",
+    "featured": true
+  }
+]
