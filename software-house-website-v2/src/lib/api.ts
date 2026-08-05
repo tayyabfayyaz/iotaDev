@@ -8,39 +8,48 @@ async function fetchJson<T>(url: string): Promise<T> {
   return res.json();
 }
 
+async function safeFetch<T>(url: string, fallback: T): Promise<T> {
+  try {
+    return await fetchJson<T>(url);
+  } catch (e) {
+    console.warn(`API unavailable for ${url}:`, (e as Error).message);
+    return fallback;
+  }
+}
+
 export function getServices() {
-  return fetchJson<any[]>("/api/services");
+  return safeFetch<any[]>("/api/services", []);
 }
 
 export function getService(id: string) {
-  return fetchJson<any>(`/api/services/${id}`);
+  return safeFetch<any>(`/api/services/${id}`, null);
 }
 
 export function getPortfolio(featured?: boolean) {
   const qs = featured ? "?featured=true" : "";
-  return fetchJson<any[]>(`/api/portfolio${qs}`);
+  return safeFetch<any[]>(`/api/portfolio${qs}`, []);
 }
 
 export function getPortfolioItem(id: string) {
-  return fetchJson<any>(`/api/portfolio/${id}`);
+  return safeFetch<any>(`/api/portfolio/${id}`, null);
 }
 
 export function getTeam() {
-  return fetchJson<any[]>("/api/team");
+  return safeFetch<any[]>("/api/team", []);
 }
 
 export function getTestimonials() {
-  return fetchJson<any[]>("/api/testimonials");
+  return safeFetch<any[]>("/api/testimonials", []);
 }
 
 export function getFaq() {
-  return fetchJson<any[]>("/api/faq");
+  return safeFetch<any[]>("/api/faq", []);
 }
 
 export function getBlogArticles() {
-  return fetchJson<any[]>("/api/blog");
+  return safeFetch<any[]>("/api/blog", []);
 }
 
 export function getBlogArticle(slug: string) {
-  return fetchJson<any>(`/api/blog/${slug}`);
+  return safeFetch<any>(`/api/blog/${slug}`, null);
 }
