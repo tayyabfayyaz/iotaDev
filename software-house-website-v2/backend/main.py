@@ -1,13 +1,14 @@
 import os
 import smtplib
 import json
+import hmac
 from datetime import datetime, timezone
 from email.message import EmailMessage
 from pathlib import Path
 from typing import Optional
 
 from dotenv import load_dotenv
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Header
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, EmailStr
 
@@ -52,6 +53,38 @@ class HealthResponse(BaseModel):
     status: str
     version: str
     timestamp: str
+
+
+class BlogPostIn(BaseModel):
+    slug: str
+    title: str
+    date: str
+    author: str
+    excerpt: str
+    content: str
+    tags: list[str] = []
+    featuredImage: str = ""
+
+
+class AdminActionResponse(BaseModel):
+    success: bool
+    slug: str = ""
+
+
+ADMIN_KEY = os.getenv("ADMIN_KEY", "")
+
+
+def require_admin(authorization: str):
+    if not ADMIN_KEY:
+        raise HTTPException(
+            status_code=503,
+            detail="Admin key is not configured on the server",
+        )
+    if not authorization.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    provided = authorization[len("Bearer "):].strip()
+    if not hmac.compare_digest(provided, ADMIN_KEY):
+        raise HTTPException(status_code=401, detail="Unauthorized")
 
 
 SMTP_HOST = os.getenv("SMTP_HOST", "smtp.gmail.com")
@@ -241,7 +274,7 @@ async def get_faq():
 @app.get("/api/blog")
 async def get_blog_articles():
     conn = get_connection()
-    rows = fetch_all(conn, "blog_articles")
+    rows = conn.execute("SELECT * FROM blog_articles ORDER BY date DESC").fetchall()
     articles = [parse_json_fields(dict(r), "tags") for r in rows]
     conn.close()
     return articles
@@ -255,6 +288,73 @@ async def get_blog_article(slug: str):
     if not article:
         raise HTTPException(status_code=404, detail="Article not found")
     return parse_json_fields(article, "tags")
+
+
+@app.get("/api/admin/blog")
+async def admin_list_blog(authorization: str = Header(default="")):
+    require_admin(authorization)
+    conn = get_connection()
+    rows = conn.execute("SELECT * FROM blog_articles ORDER BY date DESC").fetchall()
+    articles = [parse_json_fields(dict(r), "tags") for r in rows]
+    conn.close()
+    return articles
+
+
+@app.post("/api/admin/blog", response_model=AdminActionResponse, status_code=201)
+async def admin_create_blog(post: BlogPostIn, authorization: str = Header(default="")):
+    require_admin(authorization)
+    slug = post.slug.strip()
+    if not slug:
+        raise HTTPException(status_code=422, detail="Slug is required")
+    conn = get_connection()
+    if fetch_one(conn, "blog_articles", "slug", slug):
+        conn.close()
+        raise HTTPException(status_code=409, detail="A post with this slug already exists")
+    conn.execute(
+        "INSERT INTO blog_articles (slug, title, date, author, excerpt, content, tags, featured_image, sort_order) VALUES (?,?,?,?,?,?,?,?,0)",
+        (slug, post.title.strip(), post.date, post.author.strip(), post.excerpt.strip(),
+         post.content, json.dumps(post.tags), post.featuredImage),
+    )
+    conn.commit()
+    conn.close()
+    return AdminActionResponse(success=True, slug=slug)
+
+
+@app.put("/api/admin/blog/{slug}", response_model=AdminActionResponse)
+async def admin_update_blog(slug: str, post: BlogPostIn, authorization: str = Header(default="")):
+    require_admin(authorization)
+    conn = get_connection()
+    if not fetch_one(conn, "blog_articles", "slug", slug):
+        conn.close()
+        raise HTTPException(status_code=404, detail="Article not found")
+    new_slug = post.slug.strip()
+    if not new_slug:
+        conn.close()
+        raise HTTPException(status_code=422, detail="Slug is required")
+    if new_slug != slug and fetch_one(conn, "blog_articles", "slug", new_slug):
+        conn.close()
+        raise HTTPException(status_code=409, detail="A post with this slug already exists")
+    conn.execute(
+        "UPDATE blog_articles SET slug=?, title=?, date=?, author=?, excerpt=?, content=?, tags=?, featured_image=? WHERE slug=?",
+        (new_slug, post.title.strip(), post.date, post.author.strip(), post.excerpt.strip(),
+         post.content, json.dumps(post.tags), post.featuredImage, slug),
+    )
+    conn.commit()
+    conn.close()
+    return AdminActionResponse(success=True, slug=new_slug)
+
+
+@app.delete("/api/admin/blog/{slug}", response_model=AdminActionResponse)
+async def admin_delete_blog(slug: str, authorization: str = Header(default="")):
+    require_admin(authorization)
+    conn = get_connection()
+    if not fetch_one(conn, "blog_articles", "slug", slug):
+        conn.close()
+        raise HTTPException(status_code=404, detail="Article not found")
+    conn.execute("DELETE FROM blog_articles WHERE slug = ?", (slug,))
+    conn.commit()
+    conn.close()
+    return AdminActionResponse(success=True, slug=slug)
 
 
 if __name__ == "__main__":

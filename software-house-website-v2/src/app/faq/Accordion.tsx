@@ -1,19 +1,28 @@
 "use client";
 
 import { useState } from "react";
-import { faqItems } from "@/lib/data";
 
-export default function Accordion() {
-  const [openId, setOpenId] = useState<string | null>(null);
+interface FaqItem {
+  id?: string;
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FaqItem[];
+}
+
+export default function Accordion({ items }: Props) {
+  const [openId, setOpenId] = useState<number | null>(null);
 
   return (
     <div className="space-y-2">
-      {faqItems.map((item) => {
-        const isOpen = openId === item.id;
+      {items.map((item, i) => {
+        const isOpen = openId === i;
         return (
-          <div key={item.id} className="border border-gray-200 rounded-lg overflow-hidden">
+          <div key={i} className="border border-gray-200 rounded-lg overflow-hidden">
             <button
-              onClick={() => setOpenId(isOpen ? null : item.id)}
+              onClick={() => setOpenId(isOpen ? null : i)}
               className="flex items-center justify-between w-full p-5 bg-white font-semibold text-left cursor-pointer hover:bg-gray-50 transition-colors duration-150"
             >
               {item.question}

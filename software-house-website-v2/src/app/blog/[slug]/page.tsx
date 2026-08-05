@@ -8,8 +8,12 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const articles = await getBlogArticles();
-  return articles.map((p) => ({ slug: p.slug }));
+  try {
+    const articles = await getBlogArticles();
+    return articles.map((p) => ({ slug: p.slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
