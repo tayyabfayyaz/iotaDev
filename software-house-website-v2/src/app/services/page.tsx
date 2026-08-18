@@ -23,20 +23,20 @@ export default async function ServicesPage() {
             <div
               key={s.id}
               id={s.id}
-              className="gradient-border rounded-xl p-8 transition-all duration-250"
+              className="gradient-border rounded-2xl p-8 transition-all duration-250"
               style={{ background: "var(--bg-card)" }}
             >
               <div className="flex items-start gap-5">
                 <div
-                  className="w-14 h-14 rounded-xl flex items-center justify-center text-2xl shrink-0"
-                  style={{ background: "linear-gradient(135deg, rgba(139,92,246,0.15), rgba(6,182,212,0.15))" }}
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shrink-0"
+                  style={{ background: "linear-gradient(135deg, rgba(124,108,255,0.15), rgba(45,212,191,0.15))" }}
                 >
                   <ServiceIcon icon={s.icon} />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 mb-3">
                     <h3 className="text-xl font-bold">{s.title}</h3>
-                    <span className="text-xs font-medium px-2.5 py-0.5 rounded-full shrink-0 self-start sm:self-center" style={{ background: "rgba(139,92,246,0.1)", color: "#A78BFA" }}>
+                    <span className="text-xs font-medium px-2.5 py-0.5 rounded-full shrink-0 self-start sm:self-center" style={{ background: "rgba(124,108,255,0.1)", color: "#A79BFF" }}>
                       {s.subServices ? `${s.subServices.length} sub-services` : "Core service"}
                     </span>
                   </div>
@@ -48,7 +48,7 @@ export default async function ServicesPage() {
                       <span
                         key={t}
                         className="px-2.5 py-0.5 text-xs font-medium rounded-full"
-                        style={{ background: "rgba(139,92,246,0.1)", color: "#A78BFA" }}
+                        style={{ background: "rgba(124,108,255,0.1)", color: "#A79BFF" }}
                       >
                         {t}
                       </span>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Reveal from "./Reveal";
 
 interface Props {
   title: string;
@@ -14,28 +15,20 @@ export default function CtaSection({
   buttonHref = "/contact",
 }: Props) {
   return (
-    <section
-      className="py-24 text-center"
-      style={{
-        background: "linear-gradient(135deg, rgba(139,92,246,0.08), rgba(6,182,212,0.08))",
-      }}
-    >
-      <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">{title}</h2>
+    <section className="py-24 text-center relative overflow-hidden">
+      <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(124,108,255,0.12), rgba(45,212,191,0.12))" }} />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full blur-[120px] opacity-50" style={{ background: "rgba(124,108,255,0.35)" }} />
+      <Reveal className="max-w-6xl mx-auto px-6 relative z-10">
+        <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">
+          <span className="gradient-text">{title}</span>
+        </h2>
         <p className="text-lg mb-8 max-w-lg mx-auto" style={{ color: "var(--text-secondary)" }}>
           {description}
         </p>
-        <Link
-          href={buttonHref}
-          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg font-semibold text-white transition-all duration-250 hover:-translate-y-0.5"
-          style={{
-            background: "linear-gradient(135deg, #8B5CF6, #06B6D4)",
-            boxShadow: "0 4px 20px rgba(139, 92, 246, 0.3)",
-          }}
-        >
+        <Link href={buttonHref} className="btn-primary">
           {buttonText}
         </Link>
-      </div>
+      </Reveal>
     </section>
   );
 }

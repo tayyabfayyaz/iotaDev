@@ -78,7 +78,7 @@ export default function ContactForm() {
         disabled={status === "loading"}
         className="w-full px-8 py-3.5 rounded-lg font-semibold text-white transition-all duration-250 disabled:opacity-60"
         style={{
-          background: "linear-gradient(135deg, #8B5CF6, #06B6D4)",
+          background: "linear-gradient(135deg, #7C6CFF, #2DD4BF)",
         }}
       >
         {status === "loading" ? "Sending..." : "Send Message"}

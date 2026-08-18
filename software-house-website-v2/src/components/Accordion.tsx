@@ -21,7 +21,7 @@ export default function Accordion({ items }: Props) {
         return (
           <div
             key={i}
-            className="gradient-border rounded-xl overflow-hidden transition-all duration-200"
+            className="gradient-border rounded-2xl overflow-hidden transition-all duration-200"
             style={{ background: "var(--bg-card)" }}
           >
             <button

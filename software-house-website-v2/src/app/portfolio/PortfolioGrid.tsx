@@ -17,12 +17,12 @@ export default function PortfolioGrid({ items }: Props) {
           <button
             key={p.id}
             onClick={() => setSelected(p)}
-            className="gradient-border rounded-xl overflow-hidden text-left transition-all duration-250 hover:-translate-y-1 cursor-pointer"
+            className="gradient-border rounded-2xl overflow-hidden text-left transition-all duration-250 hover:-translate-y-1 cursor-pointer"
             style={{ background: "var(--bg-card)" }}
           >
             <div
               className="h-48 flex items-center justify-center text-5xl font-bold"
-              style={{ background: "linear-gradient(135deg, rgba(139,92,246,0.2), rgba(6,182,212,0.2))" }}
+              style={{ background: "linear-gradient(135deg, rgba(124,108,255,0.2), rgba(45,212,191,0.2))" }}
             >
               {p.title.charAt(0)}
             </div>
@@ -39,7 +39,7 @@ export default function PortfolioGrid({ items }: Props) {
                   <span
                     key={t}
                     className="px-2.5 py-0.5 text-xs font-medium rounded-full"
-                    style={{ background: "rgba(139,92,246,0.1)", color: "#A78BFA" }}
+                    style={{ background: "rgba(124,108,255,0.1)", color: "#A79BFF" }}
                   >
                     {t}
                   </span>
@@ -57,7 +57,7 @@ export default function PortfolioGrid({ items }: Props) {
           style={{ background: "rgba(0,0,0,0.6)" }}
         >
           <div
-            className="rounded-xl max-w-lg w-full p-8 relative"
+            className="rounded-2xl max-w-lg w-full p-8 relative"
             onClick={(e) => e.stopPropagation()}
             style={{ background: "var(--bg-card)" }}
           >
@@ -80,7 +80,7 @@ export default function PortfolioGrid({ items }: Props) {
                 <span
                   key={t}
                   className="px-2.5 py-0.5 text-xs font-medium rounded-full"
-                  style={{ background: "rgba(139,92,246,0.1)", color: "#A78BFA" }}
+                  style={{ background: "rgba(124,108,255,0.1)", color: "#A79BFF" }}
                 >
                   {t}
                 </span>

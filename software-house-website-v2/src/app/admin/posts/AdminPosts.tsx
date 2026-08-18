@@ -64,7 +64,7 @@ export default function AdminPosts() {
             <Link
               href="/admin/posts/new"
               className="px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-250 hover:-translate-y-0.5"
-              style={{ background: "linear-gradient(135deg, #8B5CF6, #06B6D4)" }}
+              style={{ background: "linear-gradient(135deg, #7C6CFF, #2DD4BF)" }}
             >
               + New Post
             </Link>
@@ -97,7 +97,7 @@ export default function AdminPosts() {
             <Link
               href="/admin/posts/new"
               className="px-6 py-2.5 rounded-lg text-sm font-semibold text-white"
-              style={{ background: "linear-gradient(135deg, #8B5CF6, #06B6D4)" }}
+              style={{ background: "linear-gradient(135deg, #7C6CFF, #2DD4BF)" }}
             >
               Create a post
             </Link>

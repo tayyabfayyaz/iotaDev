@@ -8,7 +8,7 @@ import ServiceIcon from "./ServiceIcon";
 function SubServiceCard({ sub }: { sub: SubService }) {
   return (
     <div
-      className="gradient-border rounded-xl overflow-hidden transition-all duration-250 hover:-translate-y-1 flex flex-col"
+      className="gradient-border rounded-2xl overflow-hidden transition-all duration-250 hover:-translate-y-1 flex flex-col"
       style={{ background: "var(--bg-card)" }}
     >
       <div className="h-44 overflow-hidden">
@@ -23,7 +23,7 @@ function SubServiceCard({ sub }: { sub: SubService }) {
         <div className="flex items-center gap-3 mb-3">
           <div
             className="w-10 h-10 rounded-lg flex items-center justify-center text-lg shrink-0"
-            style={{ background: "linear-gradient(135deg, rgba(139,92,246,0.15), rgba(6,182,212,0.15))" }}
+            style={{ background: "linear-gradient(135deg, rgba(124,108,255,0.15), rgba(45,212,191,0.15))" }}
           >
             <ServiceIcon icon={sub.icon} />
           </div>
@@ -45,7 +45,7 @@ function SubServiceCard({ sub }: { sub: SubService }) {
             <span
               key={t}
               className="px-2.5 py-0.5 text-xs font-medium rounded-full"
-              style={{ background: "rgba(139,92,246,0.1)", color: "#A78BFA" }}
+              style={{ background: "rgba(124,108,255,0.1)", color: "#A79BFF" }}
             >
               {t}
             </span>
@@ -55,7 +55,7 @@ function SubServiceCard({ sub }: { sub: SubService }) {
           href="/contact"
           className="mt-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-250 hover:-translate-y-0.5"
           style={{
-            background: "linear-gradient(135deg, #8B5CF6, #06B6D4)",
+            background: "linear-gradient(135deg, #7C6CFF, #2DD4BF)",
           }}
         >
           Get Started &rarr;

@@ -19,12 +19,12 @@ export default async function TeamPage() {
               {teamMembers.map((m) => (
                 <div
                   key={m.id}
-                  className="gradient-border rounded-xl overflow-hidden transition-all duration-250 hover:-translate-y-1"
+                  className="gradient-border rounded-2xl overflow-hidden transition-all duration-250 hover:-translate-y-1"
                   style={{ background: "var(--bg-card)" }}
                 >
                   <div
                     className="h-48 flex items-center justify-center text-6xl"
-                    style={{ background: "linear-gradient(135deg, rgba(139,92,246,0.15), rgba(6,182,212,0.15))" }}
+                    style={{ background: "linear-gradient(135deg, rgba(124,108,255,0.15), rgba(45,212,191,0.15))" }}
                   >
                     <span className="gradient-text">{m.name.charAt(0)}</span>
                   </div>

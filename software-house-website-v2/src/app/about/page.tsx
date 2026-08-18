@@ -36,9 +36,9 @@ export default function AboutPage() {
               </div>
             </div>
             <div
-              className="h-[400px] rounded-xl flex items-center justify-center text-6xl font-bold"
+              className="h-[400px] rounded-2xl flex items-center justify-center text-6xl font-bold"
               style={{
-                background: "linear-gradient(135deg, rgba(139,92,246,0.15), rgba(6,182,212,0.15))",
+                background: "linear-gradient(135deg, rgba(124,108,255,0.15), rgba(45,212,191,0.15))",
               }}
             >
               <span className="gradient-text">iota</span>
@@ -58,7 +58,7 @@ export default function AboutPage() {
             ].map((v) => (
               <div
                 key={v.title}
-                className="gradient-border rounded-xl p-8"
+                className="gradient-border rounded-2xl p-8"
                 style={{ background: "var(--bg-card)" }}
               >
                 <h3 className="text-xl font-bold mb-3">{v.title}</h3>

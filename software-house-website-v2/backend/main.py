@@ -260,7 +260,13 @@ async def get_testimonials():
     conn = get_connection()
     rows = fetch_all(conn, "testimonials")
     conn.close()
-    return [dict(r) for r in rows]
+    items = []
+    for r in rows:
+        item = dict(r)
+        if "client_name" in item:
+            item["clientName"] = item.pop("client_name")
+        items.append(item)
+    return items
 
 
 @app.get("/api/faq")

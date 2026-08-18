@@ -18,12 +18,12 @@ export default async function BlogPage() {
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="gradient-border rounded-xl overflow-hidden transition-all duration-250 hover:-translate-y-1"
+                className="gradient-border rounded-2xl overflow-hidden transition-all duration-250 hover:-translate-y-1"
                 style={{ background: "var(--bg-card)" }}
               >
                 <div
                   className="h-44 flex items-center justify-center text-4xl font-bold"
-                  style={{ background: "linear-gradient(135deg, rgba(139,92,246,0.15), rgba(6,182,212,0.15))" }}
+                  style={{ background: "linear-gradient(135deg, rgba(124,108,255,0.15), rgba(45,212,191,0.15))" }}
                 >
                   <span className="gradient-text">{post.title.charAt(0)}</span>
                 </div>
@@ -37,7 +37,7 @@ export default async function BlogPage() {
                   </p>
                   <div className="flex items-center gap-2 mt-4">
                     <span className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold"
-                      style={{ background: "linear-gradient(135deg, rgba(139,92,246,0.2), rgba(6,182,212,0.2))" }}>
+                      style={{ background: "linear-gradient(135deg, rgba(124,108,255,0.2), rgba(45,212,191,0.2))" }}>
                       {post.author.charAt(0)}
                     </span>
                     <span className="text-xs" style={{ color: "var(--text-muted)" }}>{post.author}</span>

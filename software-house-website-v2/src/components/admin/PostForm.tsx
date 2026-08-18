@@ -225,7 +225,7 @@ export default function PostForm({ initial = {}, submitLabel, onSubmit, onCancel
           type="submit"
           disabled={status === "loading"}
           className="px-8 py-3 rounded-lg font-semibold text-white transition-all duration-250 disabled:opacity-60"
-          style={{ background: "linear-gradient(135deg, #8B5CF6, #06B6D4)" }}
+          style={{ background: "linear-gradient(135deg, #7C6CFF, #2DD4BF)" }}
         >
           {status === "loading" ? "Saving..." : submitLabel}
         </button>

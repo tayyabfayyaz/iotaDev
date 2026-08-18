@@ -3,6 +3,7 @@ import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ThemeProvider from "@/components/ThemeProvider";
+import Preloader from "@/components/Preloader";
 
 export const metadata: Metadata = {
   title: {
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         }} />
       </head>
       <body className="min-h-screen" style={{ background: "var(--bg)" }}>
+        <Preloader />
         <ThemeProvider>
           <Nav />
           <main>{children}</main>

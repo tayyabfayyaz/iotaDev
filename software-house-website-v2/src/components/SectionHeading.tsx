@@ -1,3 +1,5 @@
+import Reveal from "./Reveal";
+
 interface Props {
   title: string;
   subtitle?: string;
@@ -5,8 +7,8 @@ interface Props {
 
 export default function SectionHeading({ title, subtitle }: Props) {
   return (
-    <div className="mb-14 text-center">
-      <h2 className="text-3xl md:text-4xl font-bold mb-4">
+    <Reveal className="mb-14 text-center">
+      <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">
         <span className="gradient-text">{title}</span>
       </h2>
       {subtitle && (
@@ -14,6 +16,6 @@ export default function SectionHeading({ title, subtitle }: Props) {
           {subtitle}
         </p>
       )}
-    </div>
+    </Reveal>
   );
 }
