@@ -69,6 +69,8 @@ def init_db():
             company TEXT NOT NULL,
             role TEXT NOT NULL,
             logo TEXT,
+            approved INTEGER DEFAULT 0,
+            timestamp TEXT,
             sort_order INTEGER DEFAULT 0
         );
 
@@ -102,7 +104,22 @@ def init_db():
         );
     """)
     conn.commit()
+
+    added_approved = _ensure_column(conn, "testimonials", "approved", "approved INTEGER DEFAULT 0")
+    if added_approved:
+        conn.execute("UPDATE testimonials SET approved = 1")
+    _ensure_column(conn, "testimonials", "timestamp", "timestamp TEXT")
+
+    conn.commit()
     conn.close()
+
+
+def _ensure_column(conn: sqlite3.Connection, table: str, column: str, ddl: str) -> bool:
+    cols = [r[1] for r in conn.execute(f"PRAGMA table_info({table})").fetchall()]
+    if column in cols:
+        return False
+    conn.execute(f"ALTER TABLE {table} ADD COLUMN {ddl}")
+    return True
 
 def fetch_all(conn: sqlite3.Connection, table: str, order: str = "sort_order") -> list[dict]:
     rows = conn.execute(f"SELECT * FROM {table} ORDER BY {order}").fetchall()

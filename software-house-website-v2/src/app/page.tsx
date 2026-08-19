@@ -6,6 +6,7 @@ import TypeWriter from "@/components/TypeWriter";
 import StatsSection from "@/components/StatsSection";
 import Reveal from "@/components/Reveal";
 import OrbitScene from "@/components/OrbitScene";
+import TestimonialForm from "@/components/TestimonialForm";
 import { getServices, getPortfolioItems, getTestimonials } from "@/lib/data";
 
 export default async function HomePage() {
@@ -167,6 +168,26 @@ export default async function HomePage() {
                 </div>
               </div>
             ))}
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="py-24" style={{ background: "var(--bg-surface)" }}>
+        <div className="max-w-2xl mx-auto px-6">
+          <Reveal>
+            <div className="text-center mb-10">
+              <span className="badge mb-4">
+                <span className="badge-dot" />
+                Share Your Experience
+              </span>
+              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">Worked with us?</h2>
+              <p className="text-base" style={{ color: "var(--text-secondary)" }}>
+                Leave a testimonial — it'll be reviewed and featured here.
+              </p>
+            </div>
+            <div className="gradient-border rounded-2xl p-6 md:p-8" style={{ background: "var(--bg-card)" }}>
+              <TestimonialForm />
+            </div>
           </Reveal>
         </div>
       </section>

@@ -1,4 +1,4 @@
-import type { BlogArticle } from "./types";
+import type { BlogArticle, Testimonial } from "./types";
 
 const ADMIN_KEY_STORAGE = "iotadev-admin-key";
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "";
@@ -70,6 +70,22 @@ export function updateBlogPost(slug: string, post: BlogArticle): Promise<{ succe
 
 export function deleteBlogPost(slug: string): Promise<{ success: boolean; slug: string }> {
   return adminFetch<{ success: boolean; slug: string }>(`/api/admin/blog/${slug}`, {
+    method: "DELETE",
+  });
+}
+
+export function listTestimonials(): Promise<Testimonial[]> {
+  return adminFetch<Testimonial[]>("/api/admin/testimonials");
+}
+
+export function approveTestimonial(id: string): Promise<{ success: boolean }> {
+  return adminFetch<{ success: boolean }>(`/api/admin/testimonials/${id}/approve`, {
+    method: "POST",
+  });
+}
+
+export function rejectTestimonial(id: string): Promise<{ success: boolean }> {
+  return adminFetch<{ success: boolean }>(`/api/admin/testimonials/${id}`, {
     method: "DELETE",
   });
 }

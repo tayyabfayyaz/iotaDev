@@ -59,7 +59,7 @@ def seed():
     testimonials = load_json("testimonials")
     for i, t in enumerate(testimonials):
         conn.execute(
-            "INSERT INTO testimonials (id, quote, client_name, company, role, logo, sort_order) VALUES (?,?,?,?,?,?,?)",
+            "INSERT INTO testimonials (id, quote, client_name, company, role, logo, approved, sort_order) VALUES (?,?,?,?,?,?,1,?)",
             (t["id"], t["quote"], t["clientName"], t["company"], t["role"],
              t.get("logo", ""), i),
         )

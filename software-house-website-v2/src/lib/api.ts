@@ -1,3 +1,5 @@
+import type { ChatMessage } from "./types";
+
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
 async function fetchJson<T>(url: string): Promise<T> {
@@ -52,4 +54,38 @@ export function getBlogArticles() {
 
 export function getBlogArticle(slug: string) {
   return safeFetch<any>(`/api/blog/${slug}`, null);
+}
+
+export interface TestimonialInput {
+  quote: string;
+  clientName: string;
+  company: string;
+  role: string;
+}
+
+export async function submitTestimonial(input: TestimonialInput): Promise<{ success: boolean }> {
+  const res = await fetch("/api/testimonials/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(input),
+  });
+  if (!res.ok) {
+    const detail = await res.json().catch(() => null);
+    throw new Error(detail?.detail || `Failed (${res.status})`);
+  }
+  return res.json();
+}
+
+export async function askAgent(message: string, history: ChatMessage[]): Promise<string> {
+  const res = await fetch("/api/agent/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message, history }),
+  });
+  if (!res.ok) {
+    const detail = await res.json().catch(() => null);
+    throw new Error(detail?.detail || `Failed (${res.status})`);
+  }
+  const data = await res.json();
+  return data.reply;
 }

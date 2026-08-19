@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import CtaSection from "@/components/CtaSection";
+import TestimonialForm from "@/components/TestimonialForm";
 import { getTestimonials } from "@/lib/data";
 
 export const metadata: Metadata = { title: "Testimonials" };
@@ -42,6 +43,24 @@ export default async function TestimonialsPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 md:py-24" style={{ background: "var(--bg-surface)" }}>
+        <div className="max-w-2xl mx-auto px-6">
+          <div className="text-center mb-10">
+            <span className="badge mb-4">
+              <span className="badge-dot" />
+              Share Your Experience
+            </span>
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-3">Worked with us?</h2>
+            <p className="text-base" style={{ color: "var(--text-secondary)" }}>
+              We'd love to hear your feedback. Submissions are reviewed before they appear on the site.
+            </p>
+          </div>
+          <div className="gradient-border rounded-2xl p-6 md:p-8" style={{ background: "var(--bg-card)" }}>
+            <TestimonialForm />
           </div>
         </div>
       </section>

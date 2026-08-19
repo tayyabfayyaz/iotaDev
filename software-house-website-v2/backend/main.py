@@ -2,6 +2,7 @@ import os
 import smtplib
 import json
 import hmac
+import uuid
 from datetime import datetime, timezone
 from email.message import EmailMessage
 from pathlib import Path
@@ -71,7 +72,47 @@ class AdminActionResponse(BaseModel):
     slug: str = ""
 
 
+class TestimonialSubmission(BaseModel):
+    quote: str
+    clientName: str
+    company: str
+    role: str
+
+
+class ChatMessage(BaseModel):
+    role: str
+    content: str
+
+
+class ChatRequest(BaseModel):
+    message: str
+    history: list[ChatMessage] = []
+
+
+class ChatResponse(BaseModel):
+    reply: str
+
+
 ADMIN_KEY = os.getenv("ADMIN_KEY", "")
+
+DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY", "")
+DEEPSEEK_BASE_URL = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com/v1")
+
+AGENT_SYSTEM_PROMPT = """You are "iota", the friendly AI assistant for iotaDev, a software house.
+Answer questions about iotaDev's services, capabilities, and process. Be concise, helpful, and professional. Use plain markdown.
+
+Company facts:
+- iotaDev offers three core services: Web Development, AI & Machine Learning, and Cloud Consulting.
+- Web Development: custom websites and web apps using React, Next.js, and TypeScript.
+- AI & ML: LLM applications, intelligent document processing, and custom AI solutions.
+- Cloud: migration, infrastructure, and DevOps.
+- Engagement process: discovery -> proposal -> build -> launch -> support.
+
+Guidelines:
+- For pricing, timelines, or a custom quote, ask about their project and direct them to the Contact page.
+- Do not invent specific prices, client names, or case studies.
+- If asked something outside iotaDev's domain, politely steer back to how iotaDev can help.
+- If you don't know, say so and offer to connect them with the team."""
 
 
 def require_admin(authorization: str):
@@ -258,7 +299,7 @@ async def get_team():
 @app.get("/api/testimonials")
 async def get_testimonials():
     conn = get_connection()
-    rows = fetch_all(conn, "testimonials")
+    rows = conn.execute("SELECT * FROM testimonials WHERE approved = 1 ORDER BY sort_order").fetchall()
     conn.close()
     items = []
     for r in rows:
@@ -267,6 +308,93 @@ async def get_testimonials():
             item["clientName"] = item.pop("client_name")
         items.append(item)
     return items
+
+
+@app.post("/api/testimonials/submit", status_code=201)
+async def submit_testimonial(data: TestimonialSubmission):
+    quote = data.quote.strip()
+    name = data.clientName.strip()
+    company = data.company.strip()
+    role = data.role.strip()
+    if not quote or not name:
+        raise HTTPException(status_code=422, detail="Quote and name are required")
+    tid = f"t-{uuid.uuid4().hex[:10]}"
+    ts = datetime.now(timezone.utc).isoformat()
+    conn = get_connection()
+    conn.execute(
+        "INSERT INTO testimonials (id, quote, client_name, company, role, logo, approved, timestamp, sort_order) VALUES (?,?,?,?,?,?,0,?,0)",
+        (tid, quote, name, company, role, "", ts),
+    )
+    conn.commit()
+    conn.close()
+    return {"success": True, "id": tid}
+
+
+@app.get("/api/admin/testimonials")
+async def admin_list_testimonials(authorization: str = Header(default="")):
+    require_admin(authorization)
+    conn = get_connection()
+    rows = conn.execute("SELECT * FROM testimonials ORDER BY approved ASC, timestamp DESC").fetchall()
+    conn.close()
+    items = []
+    for r in rows:
+        item = dict(r)
+        if "client_name" in item:
+            item["clientName"] = item.pop("client_name")
+        items.append(item)
+    return items
+
+
+@app.post("/api/admin/testimonials/{tid}/approve")
+async def admin_approve_testimonial(tid: str, authorization: str = Header(default="")):
+    require_admin(authorization)
+    conn = get_connection()
+    cur = conn.execute("UPDATE testimonials SET approved = 1 WHERE id = ?", (tid,))
+    conn.commit()
+    conn.close()
+    if cur.rowcount == 0:
+        raise HTTPException(status_code=404, detail="Testimonial not found")
+    return {"success": True, "id": tid}
+
+
+@app.delete("/api/admin/testimonials/{tid}")
+async def admin_reject_testimonial(tid: str, authorization: str = Header(default="")):
+    require_admin(authorization)
+    conn = get_connection()
+    cur = conn.execute("DELETE FROM testimonials WHERE id = ?", (tid,))
+    conn.commit()
+    conn.close()
+    if cur.rowcount == 0:
+        raise HTTPException(status_code=404, detail="Testimonial not found")
+    return {"success": True, "id": tid}
+
+
+@app.post("/api/agent/chat", response_model=ChatResponse)
+async def agent_chat(req: ChatRequest):
+    message = req.message.strip()
+    if not message:
+        raise HTTPException(status_code=422, detail="Message is required")
+    if not DEEPSEEK_API_KEY:
+        raise HTTPException(status_code=503, detail="Agent is not configured on the server")
+    try:
+        from openai import OpenAI
+        client = OpenAI(api_key=DEEPSEEK_API_KEY, base_url=DEEPSEEK_BASE_URL)
+        messages = [{"role": "system", "content": AGENT_SYSTEM_PROMPT}]
+        for m in req.history[-10:]:
+            messages.append({"role": m.role, "content": m.content})
+        messages.append({"role": "user", "content": message})
+        resp = client.chat.completions.create(
+            model="deepseek-chat",
+            messages=messages,
+            temperature=0.7,
+            max_tokens=1024,
+        )
+        reply = (resp.choices[0].message.content or "").strip()
+        return ChatResponse(reply=reply)
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"Agent error: {str(e)}")
 
 
 @app.get("/api/faq")

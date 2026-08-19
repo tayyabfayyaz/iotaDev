@@ -4,6 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ThemeProvider from "@/components/ThemeProvider";
 import Preloader from "@/components/Preloader";
+import ChatWidget from "@/components/ChatWidget";
 
 export const metadata: Metadata = {
   title: {
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Nav />
           <main>{children}</main>
           <Footer />
+          <ChatWidget />
         </ThemeProvider>
       </body>
     </html>

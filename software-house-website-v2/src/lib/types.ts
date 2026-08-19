@@ -49,6 +49,13 @@ export interface Testimonial {
   company: string;
   role: string;
   logo: string;
+  approved?: number;
+  timestamp?: string;
+}
+
+export interface ChatMessage {
+  role: "user" | "assistant";
+  content: string;
 }
 
 export interface FAQItem {

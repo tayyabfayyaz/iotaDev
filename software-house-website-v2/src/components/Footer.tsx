@@ -114,6 +114,7 @@ export default function Footer() {
               {[
                 { href: "/contact", label: "Get in Touch" },
                 { href: "/faq", label: "FAQ" },
+                { href: "/ask", label: "Ask iota (AI)" },
               ].map((l) => (
                 <li key={l.href}>
                   <Link href={l.href} className="text-sm transition-colors duration-150 hover:text-primary" style={{ color: "var(--text-secondary)" }}>
