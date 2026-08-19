@@ -21,13 +21,13 @@ def seed():
     services = load_json("services")
     for i, s in enumerate(services):
         conn.execute(
-            "INSERT INTO services (id, title, tagline, description, icon, technologies, features, sort_order) VALUES (?,?,?,?,?,?,?,?)",
+            "INSERT INTO services (id, title, tagline, description, icon, technologies, features, sort_order) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)",
             (s["id"], s["title"], s["tagline"], s["description"], s["icon"],
              json.dumps(s["technologies"]), json.dumps(s["features"]), i),
         )
         for j, sub in enumerate(s.get("subServices", [])):
             conn.execute(
-                "INSERT INTO sub_services (id, service_id, title, tagline, description, icon, image, key_points, technologies, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?)",
+                "INSERT INTO sub_services (id, service_id, title, tagline, description, icon, image, key_points, technologies, sort_order) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
                 (sub["id"], s["id"], sub["title"], sub["tagline"], sub["description"],
                  sub["icon"], sub.get("image", ""),
                  json.dumps(sub["keyPoints"]), json.dumps(sub["technologies"]), j),
@@ -38,7 +38,7 @@ def seed():
     portfolio = load_json("portfolio")
     for i, p in enumerate(portfolio):
         conn.execute(
-            "INSERT INTO portfolio (id, title, client, summary, challenge, solution, outcome, technologies, image, featured, sort_order) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+            "INSERT INTO portfolio (id, title, client, summary, challenge, solution, outcome, technologies, image, featured, sort_order) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
             (p["id"], p["title"], p["client"], p["summary"], p["challenge"],
              p["solution"], p["outcome"], json.dumps(p["technologies"]),
              p.get("image", ""), 1 if p.get("featured") else 0, i),
@@ -49,7 +49,7 @@ def seed():
     team = load_json("team")
     for i, m in enumerate(team):
         conn.execute(
-            "INSERT INTO team_members (id, name, role, photo, bio, social, sort_order) VALUES (?,?,?,?,?,?,?)",
+            "INSERT INTO team_members (id, name, role, photo, bio, social, sort_order) VALUES (%s,%s,%s,%s,%s,%s,%s)",
             (m["id"], m["name"], m["role"], m.get("photo", ""), m["bio"],
              json.dumps(m["social"]), i),
         )
@@ -59,7 +59,7 @@ def seed():
     testimonials = load_json("testimonials")
     for i, t in enumerate(testimonials):
         conn.execute(
-            "INSERT INTO testimonials (id, quote, client_name, company, role, logo, approved, sort_order) VALUES (?,?,?,?,?,?,1,?)",
+            "INSERT INTO testimonials (id, quote, client_name, company, role, logo, approved, sort_order) VALUES (%s,%s,%s,%s,%s,%s,1,%s)",
             (t["id"], t["quote"], t["clientName"], t["company"], t["role"],
              t.get("logo", ""), i),
         )
@@ -69,7 +69,7 @@ def seed():
     faq = load_json("faq")
     for i, f in enumerate(faq):
         conn.execute(
-            "INSERT INTO faq (id, question, answer, sort_order) VALUES (?,?,?,?)",
+            "INSERT INTO faq (id, question, answer, sort_order) VALUES (%s,%s,%s,%s)",
             (f["id"], f["question"], f["answer"], i),
         )
 
@@ -109,7 +109,7 @@ def seed():
     ]
     for i, a in enumerate(blog_articles):
         conn.execute(
-            "INSERT INTO blog_articles (slug, title, date, author, excerpt, content, tags, featured_image, sort_order) VALUES (?,?,?,?,?,?,?,?,?)",
+            "INSERT INTO blog_articles (slug, title, date, author, excerpt, content, tags, featured_image, sort_order) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)",
             (a["slug"], a["title"], a["date"], a["author"], a["excerpt"],
              a["content"], json.dumps(a["tags"]), a.get("featuredImage", ""), i),
         )

@@ -174,7 +174,7 @@ def save_submission_to_db(data: ContactSubmission) -> str:
     timestamp = datetime.now(timezone.utc).isoformat()
     conn = get_connection()
     conn.execute(
-        "INSERT INTO contact_submissions (name, email, phone, service, message, timestamp) VALUES (?,?,?,?,?,?)",
+        "INSERT INTO contact_submissions (name, email, phone, service, message, timestamp) VALUES (%s,%s,%s,%s,%s,%s)",
         (data.name, data.email, data.phone, data.service, data.message, timestamp),
     )
     conn.commit()
@@ -232,7 +232,7 @@ async def get_services():
     for r in rows:
         parse_json_fields(r, "technologies", "features")
         sub_rows = conn.execute(
-            "SELECT * FROM sub_services WHERE service_id = ? ORDER BY sort_order", (r["id"],)
+            "SELECT * FROM sub_services WHERE service_id = %s ORDER BY sort_order", (r["id"],)
         ).fetchall()
         subs = []
         for sr in sub_rows:
@@ -253,7 +253,7 @@ async def get_service(service_id: str):
         raise HTTPException(status_code=404, detail="Service not found")
     parse_json_fields(service, "technologies", "features")
     sub_rows = conn.execute(
-        "SELECT * FROM sub_services WHERE service_id = ? ORDER BY sort_order", (service_id,)
+        "SELECT * FROM sub_services WHERE service_id = %s ORDER BY sort_order", (service_id,)
     ).fetchall()
     subs = []
     for r in sub_rows:
@@ -322,7 +322,7 @@ async def submit_testimonial(data: TestimonialSubmission):
     ts = datetime.now(timezone.utc).isoformat()
     conn = get_connection()
     conn.execute(
-        "INSERT INTO testimonials (id, quote, client_name, company, role, logo, approved, timestamp, sort_order) VALUES (?,?,?,?,?,?,0,?,0)",
+        "INSERT INTO testimonials (id, quote, client_name, company, role, logo, approved, timestamp, sort_order) VALUES (%s,%s,%s,%s,%s,%s,0,%s,0)",
         (tid, quote, name, company, role, "", ts),
     )
     conn.commit()
@@ -349,10 +349,11 @@ async def admin_list_testimonials(authorization: str = Header(default="")):
 async def admin_approve_testimonial(tid: str, authorization: str = Header(default="")):
     require_admin(authorization)
     conn = get_connection()
-    cur = conn.execute("UPDATE testimonials SET approved = 1 WHERE id = ?", (tid,))
+    cur = conn.execute("UPDATE testimonials SET approved = 1 WHERE id = %s", (tid,))
+    rowcount = cur.rowcount
     conn.commit()
     conn.close()
-    if cur.rowcount == 0:
+    if rowcount == 0:
         raise HTTPException(status_code=404, detail="Testimonial not found")
     return {"success": True, "id": tid}
 
@@ -361,10 +362,11 @@ async def admin_approve_testimonial(tid: str, authorization: str = Header(defaul
 async def admin_reject_testimonial(tid: str, authorization: str = Header(default="")):
     require_admin(authorization)
     conn = get_connection()
-    cur = conn.execute("DELETE FROM testimonials WHERE id = ?", (tid,))
+    cur = conn.execute("DELETE FROM testimonials WHERE id = %s", (tid,))
+    rowcount = cur.rowcount
     conn.commit()
     conn.close()
-    if cur.rowcount == 0:
+    if rowcount == 0:
         raise HTTPException(status_code=404, detail="Testimonial not found")
     return {"success": True, "id": tid}
 
@@ -445,7 +447,7 @@ async def admin_create_blog(post: BlogPostIn, authorization: str = Header(defaul
         conn.close()
         raise HTTPException(status_code=409, detail="A post with this slug already exists")
     conn.execute(
-        "INSERT INTO blog_articles (slug, title, date, author, excerpt, content, tags, featured_image, sort_order) VALUES (?,?,?,?,?,?,?,?,0)",
+        "INSERT INTO blog_articles (slug, title, date, author, excerpt, content, tags, featured_image, sort_order) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,0)",
         (slug, post.title.strip(), post.date, post.author.strip(), post.excerpt.strip(),
          post.content, json.dumps(post.tags), post.featuredImage),
     )
@@ -469,7 +471,7 @@ async def admin_update_blog(slug: str, post: BlogPostIn, authorization: str = He
         conn.close()
         raise HTTPException(status_code=409, detail="A post with this slug already exists")
     conn.execute(
-        "UPDATE blog_articles SET slug=?, title=?, date=?, author=?, excerpt=?, content=?, tags=?, featured_image=? WHERE slug=?",
+        "UPDATE blog_articles SET slug=%s, title=%s, date=%s, author=%s, excerpt=%s, content=%s, tags=%s, featured_image=%s WHERE slug=%s",
         (new_slug, post.title.strip(), post.date, post.author.strip(), post.excerpt.strip(),
          post.content, json.dumps(post.tags), post.featuredImage, slug),
     )
@@ -485,7 +487,7 @@ async def admin_delete_blog(slug: str, authorization: str = Header(default="")):
     if not fetch_one(conn, "blog_articles", "slug", slug):
         conn.close()
         raise HTTPException(status_code=404, detail="Article not found")
-    conn.execute("DELETE FROM blog_articles WHERE slug = ?", (slug,))
+    conn.execute("DELETE FROM blog_articles WHERE slug = %s", (slug,))
     conn.commit()
     conn.close()
     return AdminActionResponse(success=True, slug=slug)
