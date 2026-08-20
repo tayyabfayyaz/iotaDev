@@ -5,6 +5,8 @@ import { getPortfolioItems } from "@/lib/data";
 
 export const metadata: Metadata = { title: "Portfolio" };
 
+export const revalidate = 60;
+
 export default async function PortfolioPage() {
   const portfolioItems = await getPortfolioItems();
   return (

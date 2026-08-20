@@ -6,6 +6,8 @@ import { getTestimonials } from "@/lib/data";
 
 export const metadata: Metadata = { title: "Testimonials" };
 
+export const revalidate = 60;
+
 export default async function TestimonialsPage() {
   const testimonials = await getTestimonials();
   return (

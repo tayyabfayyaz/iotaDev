@@ -9,6 +9,8 @@ import OrbitScene from "@/components/OrbitScene";
 import TestimonialForm from "@/components/TestimonialForm";
 import { getServices, getPortfolioItems, getTestimonials } from "@/lib/data";
 
+export const revalidate = 60;
+
 export default async function HomePage() {
   const [services, portfolioItems, testimonials] = await Promise.all([
     getServices(),

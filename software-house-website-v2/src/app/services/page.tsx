@@ -8,6 +8,8 @@ import { getServices } from "@/lib/data";
 
 export const metadata: Metadata = { title: "Services" };
 
+export const revalidate = 60;
+
 export default async function ServicesPage() {
   const services = await getServices();
   return (

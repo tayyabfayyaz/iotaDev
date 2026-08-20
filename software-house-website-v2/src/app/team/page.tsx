@@ -6,6 +6,8 @@ import { getTeamMembers } from "@/lib/data";
 
 export const metadata: Metadata = { title: "Team" };
 
+export const revalidate = 60;
+
 export default async function TeamPage() {
   const teamMembers = await getTeamMembers();
   return (
