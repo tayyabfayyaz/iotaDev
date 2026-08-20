@@ -3,6 +3,7 @@ import smtplib
 import json
 import hmac
 import uuid
+import threading
 from datetime import datetime, timezone
 from email.message import EmailMessage
 from pathlib import Path
@@ -163,7 +164,7 @@ Message:
 Submitted: {datetime.now(timezone.utc).isoformat()}
 """
         msg.set_content(body)
-        with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as s:
+        with smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=15) as s:
             s.starttls()
             s.login(SMTP_USER, SMTP_PASS)
             s.send_message(msg)
@@ -210,7 +211,7 @@ async def health_check():
 
 
 @app.post("/api/contact", response_model=ContactResponse)
-async def submit_contact(data: ContactSubmission):
+def submit_contact(data: ContactSubmission):
     if not data.name.strip():
         raise HTTPException(status_code=422, detail="Name is required")
     if not data.message.strip():
@@ -218,17 +219,21 @@ async def submit_contact(data: ContactSubmission):
 
     try:
         ts = save_submission_to_db(data)
-        send_email_notification(data)
-        return ContactResponse(
-            success=True,
-            message="Thank you! Your message has been received.",
-            timestamp=ts,
-        )
     except Exception as e:
         raise HTTPException(
             status_code=500,
             detail=f"Failed to save submission: {str(e)}",
         )
+
+    threading.Thread(
+        target=send_email_notification, args=(data,), daemon=True
+    ).start()
+
+    return ContactResponse(
+        success=True,
+        message="Thank you! Your message has been received.",
+        timestamp=ts,
+    )
 
 
 @app.get("/api/services")

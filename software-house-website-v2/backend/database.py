@@ -114,7 +114,7 @@ def get_connection():
         raise RuntimeError(
             "DATABASE_URL is not set. Add your Supabase Postgres connection string to backend/.env"
         )
-    return psycopg.connect(DATABASE_URL, row_factory=dict_row)
+    return psycopg.connect(DATABASE_URL, row_factory=dict_row, connect_timeout=15)
 
 
 def init_db():
