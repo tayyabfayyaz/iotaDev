@@ -23,13 +23,19 @@ app = FastAPI(
     version="1.0.0",
 )
 
+_default_origins = [
+    "http://localhost:3000",
+    "https://iotadev.com",
+    "https://www.iotadev.com",
+    "https://iota-dev.vercel.app",
+    "https://iota-iota.vercel.app",
+]
+_cors_origins = os.getenv("CORS_ORIGINS", "").split(",")
+_cors_origins = [o.strip() for o in _cors_origins if o.strip()] or _default_origins
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "https://iotadev.com",
-        "https://www.iotadev.com",
-    ],
+    allow_origins=_cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
